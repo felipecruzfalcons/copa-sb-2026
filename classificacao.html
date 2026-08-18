@@ -8,17 +8,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold:      #C99000;
+    --gold:      #FCC100;
     --gold-bg:   #FCC100;
-    --gold-light:#fff8e1;
-    --bg:        #ffffff;
-    --surface:   #f7f7f7;
-    --surface2:  #efefef;
-    --border:    #e0e0e0;
-    --text:      #111111;
-    --gray:      #666666;
-    --green:     #16a34a;
-    --red:       #dc2626;
+    --gold-dim:  #C99000;
+    --row-bg:    #1a1600;
+    --row-alt:   #221c00;
+    --row-leader:#2a2200;
+    --border:    rgba(252,193,0,0.15);
+    --text:      #e8e8e8;
+    --gray:      rgba(255,255,255,0.45);
+    --green:     #4ade80;
+    --red:       #f87171;
     --white:     #ffffff;
   }
 
@@ -29,7 +29,7 @@
   }
 
   body {
-    background: var(--bg);
+    background: #111;
     color: var(--text);
     font-family: 'Saira Condensed', sans-serif;
     min-height: 100vh;
@@ -80,7 +80,7 @@
   .card {
     width: 100%;
     max-width: 96vw;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(252,193,0,0.2);
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 0 4px 32px rgba(0,0,0,0.10);
@@ -111,18 +111,20 @@
 
   tbody tr {
     border-bottom: 1px solid var(--border);
-    transition: background 0.12s;
+    background: var(--row-bg);
+    transition: background 0.15s;
   }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
   tbody tr:last-child { border-bottom: none; }
-  tbody tr:hover { background: var(--gold-light); }
-  tbody tr.leader { background: #fffbea; }
+  tbody tr:hover { background: rgba(252,193,0,0.08); }
+  tbody tr.leader { background: var(--row-leader); border-left: 3px solid var(--gold); }
 
   td {
     padding: 1.4vh 1vw;
     text-align: center;
     font-weight: 600;
     font-size: 1.8vw;
-    color: var(--text);
+    color: #e8e8e8;
   }
   td.pos {
     font-size: 1.3vw;
@@ -136,7 +138,7 @@
     font-weight: 800;
     font-size: 2vw;
     white-space: nowrap;
-    color: #111;
+    color: #fff;
   }
 
   td.pos-sg { color: var(--green); font-weight: 800; }
@@ -146,10 +148,18 @@
   td.pts-ext { color: var(--gold); font-weight: 800; }
   td.pts-col { color: var(--gold); font-weight: 800; }
   td.total-col {
-    color: #111;
+    color: #fff;
     font-weight: 900;
     font-size: 2.2vw;
-    background: rgba(252,193,0,0.13);
+    background: rgba(252,193,0,0.10);
+  }
+
+  thead tr th {
+    border-bottom: 4px solid transparent;
+  }
+
+  tr.group-hdr:first-child td {
+    padding-top: 1.2vh;
   }
 
   tr.group-hdr td {
@@ -188,11 +198,11 @@
     letter-spacing: 0.15em;
     color: var(--gray);
     padding: 1.2vh 2vw;
-    background: var(--surface);
-    border-top: 1px solid var(--border);
+    background: #111;
+    border-top: 1px solid rgba(252,193,0,0.15);
     text-transform: uppercase;
   }
-  .legend strong { color: #111; }
+  .legend strong { color: #fff; }
   .legend .upd { color: var(--gold); margin-left: auto; }
 
   /* ─── FOOTER ─── */
@@ -203,8 +213,8 @@
     font-size: 1vw;
     letter-spacing: 0.2em;
     color: #bbb;
-    border-top: 1px solid var(--border);
-    background: var(--surface);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    background: #0d0d0d;
     text-transform: uppercase;
     flex-shrink: 0;
   }
@@ -276,7 +286,7 @@ function sgClass(s){ return s.startsWith("+") ? "pos-sg" : (s.startsWith("−")|
 
 </main>
 
-<footer class="page-footer">Copa SB 2026 · SeuBoné · Grupo Quatro5</footer>
+<footer class="page-footer">Copa SB 2026 · SeuBoné</footer>
 
 <script>
 document.getElementById("upd").textContent = CONFIG.atualizadoEm;
