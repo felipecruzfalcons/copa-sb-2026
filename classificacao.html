@@ -163,21 +163,18 @@
     text-transform: uppercase;
   }
 
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.8vw;
-    height: 2.8vw;
-    border-radius: 50%;
-    font-size: 1vw;
-    font-weight: 900;
+  .squad-img {
+    display: inline-block;
+    width: 3.8vw;
+    height: 3.8vw;
+    border-radius: 8px;
+    object-fit: cover;
+    object-position: center top;
     margin-right: 1vw;
     vertical-align: middle;
+    border: 2px solid rgba(252,193,0,0.3);
+    background: #222;
   }
-  .b-badge { background: #3b82f6; color: #fff; }
-  .a-badge { background: #ef4444; color: #fff; }
-  .c-badge { background: #16a34a; color: #fff; }
 
   /* ─── LEGENDA ─── */
   .legend {
@@ -221,20 +218,25 @@ const CONFIG = {
     {
       nome: "GRUPO CLOSER",
       times: [
-        { pos:1, cod:"CB", nome:"CLOSER B", part:4, vit:3, der:1, gp:21, gc:14, saldo:"+7",  ptsExt:"+3", pts:10, total:13, lider:true  },
-        { pos:2, cod:"CA", nome:"CLOSER A", part:4, vit:1, der:3, gp:14, gc:21, saldo:"−7",  ptsExt:"+1", pts:6,  total:7,  lider:false },
+        { pos:1, cod:"CB", nome:"STARK", part:4, vit:3, der:1, gp:21, gc:14, saldo:"+7",  ptsExt:"+3", pts:10, total:13, lider:true  },
+        { pos:2, cod:"CA", nome:"FALCONS", part:4, vit:1, der:3, gp:14, gc:21, saldo:"−7",  ptsExt:"+1", pts:6,  total:7,  lider:false },
       ]
     },
     {
       nome: "GRUPO GERENTES DE CONTAS",
       times: [
-        { pos:1, cod:"GB", nome:"GC B", part:4, vit:4, der:0, gp:23, gc:12, saldo:"+11", ptsExt:"+4", pts:12, total:16, lider:true  },
-        { pos:2, cod:"GA", nome:"GC A", part:4, vit:0, der:4, gp:12, gc:23, saldo:"−11", ptsExt:"+2", pts:4,  total:6,  lider:false },
+        { pos:1, cod:"GB", nome:"NEXUS", part:4, vit:4, der:0, gp:23, gc:12, saldo:"+11", ptsExt:"+4", pts:12, total:16, lider:true  },
+        { pos:2, cod:"GA", nome:"MAVERICK", part:4, vit:0, der:4, gp:12, gc:23, saldo:"−11", ptsExt:"+2", pts:4,  total:6,  lider:false },
       ]
     }
   ]
 };
-const BADGE = { CB:"b-badge", CA:"a-badge", GB:"c-badge", GA:"a-badge" };
+const IMG = {
+  CA: "falcons.jpg",
+  CB: "stark.jpeg",
+  GB: "nexus.png",
+  GA: "maverick.png"
+};
 function sgClass(s){ return s.startsWith("+") ? "pos-sg" : (s.startsWith("−")||s.startsWith("-")) ? "neg-sg" : "neu-sg"; }
 </script>
 
@@ -290,7 +292,7 @@ CONFIG.grupos.forEach(grupo => {
     const sgC = sgClass(t.saldo);
     tr.innerHTML = `
       <td class="pos">${t.pos}</td>
-      <td class="team-cell"><span class="badge ${BADGE[t.cod]||'a-badge'}">${t.cod}</span>${t.nome}</td>
+      <td class="team-cell"><img class="squad-img" src="${IMG[t.cod]}" alt="${t.nome}">${t.nome}</td>
       <td>${t.part}</td>
       <td>${t.vit}</td>
       <td>${t.der}</td>
