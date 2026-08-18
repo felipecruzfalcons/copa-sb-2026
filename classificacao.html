@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copa SB 2026 · Classificação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ─── VARIÁVEIS ─────────────────────────────────────── */
+  :root {
+    --gold:      #FCC100;
+    --gold-glow: rgba(252,193,0,0.35);
+    --bg:        #0d0d0d;
+    --surface:   #161616;
+    --surface2:  #1e1e1e;
+    --border:    rgba(255,255,255,0.07);
+    --text:      #e8e8e8;
+    --gray:      rgba(255,255,255,0.45);
+    --green:     #4ade80;
+    --red:       #f87171;
+    --white:     #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ─── HEADER ────────────────────────────────────────── */
+  .page-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Saira Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+  }
+  .brand strong {
+    color: var(--gold);
+    font-size: 15px;
+  }
+  .update-badge {
+    font-family: 'Saira Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--gray);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 4px;
+  }
+  .update-badge span { color: var(--gold); }
+
+  /* ─── HERO ──────────────────────────────────────────── */
+  .hero {
+    text-align: center;
+    padding: 48px 32px 32px;
+  }
+  .kicker {
+    font-family: 'Saira Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .kicker::before { content: '| '; color: var(--gold); }
+  .hero-title {
+    font-family: 'Saira Condensed', sans-serif;
+    font-size: clamp(28px, 5vw, 56px);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .hero-title .gold {
+    color: var(--gold);
+    text-shadow: 0 0 30px var(--gold-glow);
+  }
+
+  /* ─── MAIN ──────────────────────────────────────────── */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+  }
+
+  /* ─── TABELA ────────────────────────────────────────── */
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Saira Condensed', sans-serif;
+    font-size: clamp(13px, 1.5vw, 16px);
+  }
+
+  thead tr {
+    background: rgba(252,193,0,0.06);
+    border-bottom: 1px solid rgba(252,193,0,0.2);
+  }
+  thead th {
+    font-weight: 800;
+    font-size: clamp(10px, 1.1vw, 13px);
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    padding: 12px 8px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  thead th.team-h { text-align: left; padding-left: 14px; }
+  thead th.pos { width: 36px; }
+  thead th.pts { color: var(--gold); }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.03); }
+  tbody tr.leader { background: rgba(252,193,0,0.05); }
+
+  td {
+    padding: 11px 8px;
+    text-align: center;
+    font-weight: 600;
+  }
+  td.pos {
+    font-size: clamp(11px, 1vw, 13px);
+    color: var(--gray);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+  td.team-cell {
+    text-align: left;
+    padding-left: 14px;
+    font-weight: 700;
+    font-size: clamp(13px, 1.4vw, 16px);
+    white-space: nowrap;
+  }
+
+  /* saldo */
+  td.pos-sg { color: var(--green); font-weight: 800; }
+  td.neg-sg { color: var(--red);   font-weight: 800; }
+  td.neu-sg  { color: var(--gray); }
+
+  /* pts cols */
+  td.pts-ext { color: var(--gold); font-weight: 800; }
+  td.pts-col { color: var(--gold); font-weight: 800; }
+  td.total-col { color: var(--white); font-weight: 900; font-size: clamp(14px,1.5vw,18px); }
+
+  /* group header row */
+  tr.group-hdr td {
+    background: rgba(252,193,0,0.08);
+    font-size: clamp(10px,1vw,12px);
+    font-weight: 800;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-align: left;
+    padding: 5px 14px;
+  }
+
+  /* badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 900;
+    margin-right: 8px;
+    flex-shrink: 0;
+    vertical-align: middle;
+  }
+  .b-badge { background: #3b82f6; color: #fff; }
+  .a-badge { background: #ef4444; color: #fff; }
+  .c-badge { background: #22c55e; color: #fff; }
+
+  /* ─── LEGENDA ───────────────────────────────────────── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    font-family: 'Saira Condensed', sans-serif;
+    font-size: clamp(10px, 1vw, 12px);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--gray);
+    padding: 12px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 24px;
+  }
+  .legend strong { color: var(--white); }
+  .legend .upd { color: var(--gold); margin-left: auto; }
+
+  /* ─── DESEMPATE ─────────────────────────────────────── */
+  .tiebreak {
+    text-align: center;
+    font-size: clamp(13px, 1.3vw, 15px);
+    color: var(--gray);
+    margin-top: 8px;
+  }
+  .tiebreak .gold { color: var(--gold); font-weight: 700; }
+
+  /* ─── FOOTER ────────────────────────────────────────── */
+  .page-footer {
+    text-align: center;
+    padding: 24px;
+    font-family: 'Saira Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.2);
+    border-top: 1px solid var(--border);
+  }
+
+  /* ─── RESPONSIVE ────────────────────────────────────── */
+  @media (max-width: 600px) {
+    .page-header { padding: 14px 16px; }
+    .main { padding: 0 10px 40px; }
+    .hero { padding: 28px 16px 20px; }
+    td, th { padding: 9px 5px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════
+     DADOS — edite aqui para atualizar a classificação
+     ════════════════════════════════════════════════ -->
+<script>
+const CONFIG = {
+  // Data da última atualização (exibida no header)
+  atualizadoEm: "18 AGO · SEMANA 7",
+
+  grupos: [
+    {
+      nome: "GRUPO CLOSER",
+      times: [
+        // pos, codigo, nome,  part, vit, der, gp, gc, saldo, ptsExt, pts, total, lider
+        { pos:1, cod:"CB", nome:"CLOSER B", part:4, vit:3, der:1, gp:21, gc:14, saldo:"+7",  ptsExt:"+3", pts:10, total:13, lider:true  },
+        { pos:2, cod:"CA", nome:"CLOSER A", part:4, vit:1, der:3, gp:14, gc:21, saldo:"−7",  ptsExt:"+1", pts:6,  total:7,  lider:false },
+      ]
+    },
+    {
+      nome: "GRUPO GERENTES DE CONTAS",
+      times: [
+        { pos:1, cod:"GB", nome:"GC B", part:4, vit:4, der:0, gp:23, gc:12, saldo:"+11", ptsExt:"+4", pts:12, total:16, lider:true  },
+        { pos:2, cod:"GA", nome:"GC A", part:4, vit:0, der:4, gp:12, gc:23, saldo:"−11", ptsExt:"+2", pts:4,  total:6,  lider:false },
+      ]
+    }
+  ]
+};
+
+// badge CSS por código
+const BADGE = { CB:"b-badge", CA:"a-badge", GB:"c-badge", GA:"a-badge" };
+// saldo CSS
+function sgClass(s){ return s.startsWith("+") ? "pos-sg" : s.startsWith("−") || s.startsWith("-") ? "neg-sg" : "neu-sg"; }
+</script>
+
+<!-- ════════════════════════════════════════════════
+     LAYOUT
+     ════════════════════════════════════════════════ -->
+<header class="page-header">
+  <div class="brand">
+    <strong>COPA SB</strong>
+    <span>· 2026</span>
+  </div>
+  <div class="update-badge">Atualizado: <span id="upd"></span></div>
+</header>
+
+<div class="hero">
+  <div class="kicker">A classificação é atualizada toda quinta — Fim de Semana SeuBoné</div>
+  <h1 class="hero-title">A <span class="gold">CLASSIFICAÇÃO</span> · O TELÃO DA COPA.</h1>
+</div>
+
+<main class="main">
+  <div class="table-wrap">
+    <table id="tabela">
+      <thead>
+        <tr>
+          <th class="pos">#</th>
+          <th class="team-h">SQUAD</th>
+          <th>PART.</th>
+          <th>VIT.</th>
+          <th>DER.</th>
+          <th>GP</th>
+          <th>GC</th>
+          <th>SALDO</th>
+          <th class="pts">PTS EXT.</th>
+          <th class="pts">PTS</th>
+          <th class="pts">TOTAL</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="legend">
+    <span><strong>SALDO</strong> = gols pró − gols contra</span>
+    <span><strong>PTS</strong> = vitória 3 · derrota 1</span>
+    <span><strong>TOTAL</strong> = PTS + PTS EXT.</span>
+    <span class="upd gold">Atualiza toda quinta</span>
+  </div>
+
+  <p class="tiebreak">
+    <span class="gold">Saldo de gols</span> é o primeiro critério de desempate. Empatou em pontos? Quem fez mais saldo, leva.
+  </p>
+</main>
+
+<footer class="page-footer">COPA SB 2026 · SEUBONÉ · GRUPO QUATRO5</footer>
+
+<!-- ════════════════════════════════════════════════
+     RENDER
+     ════════════════════════════════════════════════ -->
+<script>
+document.getElementById("upd").textContent = CONFIG.atualizadoEm;
+
+const tbody = document.getElementById("tbody");
+const COLS = 11;
+
+CONFIG.grupos.forEach(grupo => {
+  // cabeçalho do grupo
+  const hdr = document.createElement("tr");
+  hdr.className = "group-hdr";
+  hdr.innerHTML = `<td colspan="${COLS}">${grupo.nome}</td>`;
+  tbody.appendChild(hdr);
+
+  grupo.times.forEach(t => {
+    const tr = document.createElement("tr");
+    if (t.lider) tr.classList.add("leader");
+    const sgC = sgClass(t.saldo);
+    tr.innerHTML = `
+      <td class="pos">${t.pos}</td>
+      <td class="team-cell"><span class="badge ${BADGE[t.cod]||'a-badge'}">${t.cod}</span>${t.nome}</td>
+      <td>${t.part}</td>
+      <td>${t.vit}</td>
+      <td>${t.der}</td>
+      <td>${t.gp}</td>
+      <td>${t.gc}</td>
+      <td class="${sgC}">${t.saldo}</td>
+      <td class="pts-ext">${t.ptsExt}</td>
+      <td class="pts-col">${t.pts}</td>
+      <td class="total-col">${t.total}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+});
+</script>
+</body>
+</html>
