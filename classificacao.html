@@ -8,28 +8,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold:      #FCC100;
-    --gold-bg:   #FCC100;
-    --gold-dim:  #C99000;
-    --row-bg:    #1a1600;
-    --row-alt:   #221c00;
-    --row-leader:#2a2200;
-    --border:    rgba(252,193,0,0.15);
-    --text:      #e8e8e8;
-    --gray:      rgba(255,255,255,0.45);
-    --green:     #4ade80;
-    --red:       #f87171;
-    --white:     #ffffff;
+    --gold:      #E8A000;
+    --gold-bg:   #E8A000;
+    --border:    #e0e0e0;
+    --text:      #1a1a1a;
+    --gray:      #777777;
+    --green:     #16a34a;
+    --red:       #dc2626;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html, body {
-    height: 100%;
-  }
+  html, body { height: 100%; }
 
   body {
-    background: #ffffff;
+    background: #ebebeb;
     color: var(--text);
     font-family: 'Saira Condensed', sans-serif;
     min-height: 100vh;
@@ -39,7 +32,8 @@
 
   /* ─── HEADER ─── */
   .page-header {
-    background: #111;
+    background: #ffffff;
+    border-bottom: 3px solid var(--gold);
     padding: 16px 48px;
     display: flex;
     align-items: center;
@@ -51,19 +45,19 @@
     font-size: 2vw;
     font-weight: 900;
     letter-spacing: 0.25em;
-    color: #fff;
+    color: #111;
     text-transform: uppercase;
   }
-  .brand span { color: var(--gold-bg); }
+  .brand span { color: var(--gold); }
   .update-badge {
     font-family: 'Saira Condensed', sans-serif;
     font-size: 1.4vw;
     font-weight: 700;
     letter-spacing: 0.15em;
-    color: #aaa;
+    color: #888;
     text-transform: uppercase;
   }
-  .update-badge b { color: var(--gold-bg); }
+  .update-badge b { color: var(--gold); }
 
   /* ─── MAIN ─── */
   .main {
@@ -76,14 +70,15 @@
     padding: 2vh 2vw;
   }
 
-  /* ─── CARD WRAPPER ─── */
+  /* ─── CARD ─── */
   .card {
     width: 100%;
     max-width: 96vw;
-    border: 1px solid rgba(252,193,0,0.2);
+    background: #ffffff;
+    border: 2px solid var(--gold);
     border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
   }
 
   /* ─── TABELA ─── */
@@ -93,13 +88,13 @@
     font-family: 'Saira Condensed', sans-serif;
   }
 
-  thead tr { background: #111; }
+  thead tr { background: #f5f5f5; border-bottom: 2px solid var(--border); }
 
   thead th {
     font-weight: 800;
     font-size: 1.4vw;
     letter-spacing: 0.18em;
-    color: #aaa;
+    color: #888;
     padding: 1.4vh 1vw;
     text-align: center;
     white-space: nowrap;
@@ -107,28 +102,30 @@
   }
   thead th.team-h { text-align: left; padding-left: 2vw; }
   thead th.pos { width: 4vw; }
-  thead th.pts { color: var(--gold-bg); }
+  thead th.pts { color: var(--gold); }
+
+  thead tr th { border-bottom: 2px solid var(--border); }
 
   tbody tr {
     border-bottom: 1px solid var(--border);
-    background: var(--row-bg);
+    background: #ffffff;
     transition: background 0.15s;
   }
-  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:nth-child(even) { background: #fafafa; }
   tbody tr:last-child { border-bottom: none; }
-  tbody tr:hover { background: rgba(252,193,0,0.08); }
-  tbody tr.leader { background: var(--row-leader); border-left: 3px solid var(--gold); }
+  tbody tr:hover { background: #fff8e8; }
+  tbody tr.leader { background: #fffbee; border-left: 3px solid var(--gold); }
 
   td {
     padding: 1.4vh 1vw;
     text-align: center;
     font-weight: 600;
     font-size: 1.8vw;
-    color: #e8e8e8;
+    color: #333;
   }
   td.pos {
     font-size: 1.3vw;
-    color: var(--gray);
+    color: #aaa;
     font-weight: 800;
     letter-spacing: 0.1em;
   }
@@ -138,39 +135,34 @@
     font-weight: 800;
     font-size: 2vw;
     white-space: nowrap;
-    color: #fff;
+    color: #111;
   }
 
   td.pos-sg { color: var(--green); font-weight: 800; }
   td.neg-sg { color: var(--red);   font-weight: 800; }
-  td.neu-sg  { color: var(--gray); }
+  td.neu-sg  { color: #aaa; }
 
   td.pts-ext { color: var(--gold); font-weight: 800; }
   td.pts-col { color: var(--gold); font-weight: 800; }
   td.total-col {
-    color: #fff;
+    color: #111;
     font-weight: 900;
     font-size: 2.2vw;
-    background: rgba(252,193,0,0.10);
+    background: rgba(232,160,0,0.08);
   }
 
-  thead tr th {
-    border-bottom: 4px solid transparent;
-  }
-
-  tr.group-hdr:first-child td {
-    padding-top: 1.2vh;
-  }
+  tr.group-hdr:first-child td { padding-top: 1.2vh; }
 
   tr.group-hdr td {
-    background: #111;
+    background: #f5f5f5;
     font-size: 1.1vw;
     font-weight: 800;
     letter-spacing: 0.3em;
-    color: var(--gold-bg);
+    color: var(--gold);
     text-align: left;
     padding: 0.5vh 1.5vw;
     text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
   }
 
   .squad-img {
@@ -182,8 +174,8 @@
     object-position: center center;
     margin-right: 1vw;
     vertical-align: middle;
-    border: 2px solid rgba(252,193,0,0.4);
-    background: #111;
+    border: 2px solid rgba(232,160,0,0.4);
+    background: #eee;
     flex-shrink: 0;
   }
 
@@ -196,13 +188,13 @@
     font-size: 1.2vw;
     font-weight: 700;
     letter-spacing: 0.15em;
-    color: var(--gray);
+    color: #888;
     padding: 1.2vh 2vw;
-    background: #111;
-    border-top: 1px solid rgba(252,193,0,0.15);
+    background: #f5f5f5;
+    border-top: 1px solid var(--border);
     text-transform: uppercase;
   }
-  .legend strong { color: #fff; }
+  .legend strong { color: #333; }
   .legend .upd { color: var(--gold); margin-left: auto; }
 
   /* ─── FOOTER ─── */
@@ -212,9 +204,9 @@
     font-family: 'Saira Condensed', sans-serif;
     font-size: 1vw;
     letter-spacing: 0.2em;
-    color: #bbb;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    background: #0d0d0d;
+    color: #aaa;
+    border-top: 1px solid var(--border);
+    background: #ffffff;
     text-transform: uppercase;
     flex-shrink: 0;
   }
